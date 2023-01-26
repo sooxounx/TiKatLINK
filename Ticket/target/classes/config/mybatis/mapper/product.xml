@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+
+	<!-- ===== 청하 ===== -->
+	<!-- INDEX -->
+	<select id="selectProductWithHero" parameterType="int" resultType="product">
+		select p.*, h.*
+		from PRODUCT p, HALL h 
+		where p.PRODUCT_SEQ = #{productSeq} and p.PRODUCT_HALL = h.HALL_SEQ
+	</select>
+	
+	<!-- 베스트 공연/전시 작품은 최대 4개까지만 출력한다 -->
+	<select id="selectBest" resultType="product">
+		<!-- CDATA : 비교연산자 있을 경우 필요 -->
+	    <![CDATA[
+		 	select p.*, h.HALL_NAME
+		   	from PRODUCT p, HALL h 
+		    where p.PRODUCT_HALL= h.HALL_SEQ and rownum <= 4
+	    ]]>
+	</select>
+	
+	<select id="selectByPdtype" resultType="product">
+		select * from PRODUCT
+		where PRODUCT_SEQ IN (select max(PRODUCT_SEQ)
+								from PRODUCT p
+								group by PRODUCT_PDTYPE)
+		order by PRODUCT_PDTYPE ASC
+	</select>
+
+	<select id="selectByArea" resultType="product">
+		select * from PRODUCT
+		where PRODUCT_SEQ IN (select max(PRODUCT_SEQ)
+								from PRODUCT p
+								group by PRODUCT_AREA)
+		order by PRODUCT_AREA asc
+	</select>
+	
+	<select id="selectSearchProduct" parameterType="String" resultType="product">
+		select *
+		from PRODUCT
+		where PRODUCT_NAME like '%${value}%'
+		order by PRODUCT_SEQ desc
+	</select>
+	
+	<!-- ADMIN -->
+	<insert id="insertProduct" parameterType="product">
+		insert into PRODUCT
+		values(#{productSeq}, #{productImage}, #{productName}, #{productRuntime}
+			, #{productPeriodBegin}, #{productPeriodEnd}, #{productRate}, #{productDetail, jdbcType=CLOB}
+			, 0, #{productCxlDeadline}, #{productCxlFee}, #{productHall}, #{productPdType} 
+			, #{productArea}, #{productCxlInfo, jdbcType=CLOB})
+	</insert>
+	
+	<select id="selectProductListOnAdmin" resultType="product">
+		select p.*, pt.*, h.*
+		from PRODUCT p, HALL h, PDTYPE pt
+	    where p.PRODUCT_HALL = h.HALL_SEQ and p.PRODUCT_PDTYPE = pt.PDTYPE_SEQ
+	    order by PRODUCT_SEQ desc
+	</select>
+	
+	<select id="getNextProductSeq" resultType="int">
+		select PRODUCT_SEQ.nextval
+		from DUAL
+	</select>
+	
+	<!-- ===== 아영 ===== -->
+	<select id="selectProduct" resultType="product">
+		select * from PRODUCT
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

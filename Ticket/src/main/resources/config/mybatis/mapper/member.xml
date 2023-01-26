@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member"><!-- SQL 문들을 파일마다 구분할 수 있는 이름... -->
+
+	<select id="checkDuplID" parameterType="String" resultType="String">
+		select member_withdrawal from member where member_id = #{memberId}
+	</select>
+	
+	<select id="checkDuplTel" parameterType="String" resultType="int">
+		select member_seq from member where member_tel = #{memberTel}
+	</select>
+
+	<insert id="insert" parameterType="member">
+		insert into member values(#{memberSeq}, #{memberId}, #{memberTel}, #{memberName}, #{memberPassword}, null, #{memberAddress}, 'n', 1, #{memberProfileImage})
+	</insert>
+	
+	<select id="checkLogin" resultType="int" parameterType="member">
+		select member_seq from member where member_id = #{memberId} and member_password = #{memberPassword}
+	</select>
+	
+	<select id="findId" parameterType="member" resultType="String">
+		select member_id from member where member_name = #{memberName} and member_tel = #{memberTel}
+	</select>
+	
+	<select id="findPw" parameterType="member" resultType="String">
+		select member_password from member where member_id = #{memberId} and member_name = #{memberName} and member_tel = #{memberTel}
+	</select>
+	
+	<select id="checkWithdrawal" resultType="String" parameterType="int">
+		select member_withdrawal from member where member_seq = #{memberSeq}
+	</select>
+
+	<update id="withdrawal" parameterType="member">
+		update member set member_withdrawal = 'y' where member_seq = #{memberSeq} and member_password = #{memberPassword}
+	</update>
+	
+	<select id="checkAdmin" parameterType="int" resultType="int">
+		select MEMBER_MEMBERSHIP
+		from MEMBER
+		where MEMBER_SEQ = #{memberSeq} and MEMBER_MEMBERSHIP = 4
+	</select>
+	
+	<select id="selectMemberVO" parameterType="int" resultType="member">
+		select m.*, ms.*
+		from MEMBER m, MEMBERSHIP ms
+		where MEMBER_SEQ = #{memberSeq} and m.MEMBER_MEMBERSHIP = ms.MEMBERSHIP_SEQ
+	</select>
+	
+	<select id="checkPassword" parameterType="member" resultType="int">
+		select MEMBER_SEQ
+		from MEMBER
+		where MEMBER_SEQ = #{memberSeq} and MEMBER_PASSWORD = #{memberPassword}
+	</select>
+	
+	<update id="updateMember" parameterType="member">
+		update MEMBER
+		set MEMBER_TEL = #{memberTel}, MEMBER_ADDRESS = #{memberAddress}
+		where MEMBER_SEQ = #{memberSeq}
+	</update>
+	
+	<select id="getNextMemberSeq" resultType="int">
+		select MEMBER_SEQ.nextval
+		from DUAL
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="DI"/>
+<aop-project name="Hello"/>
+<aop-project name="MyBatis"/>
+<aop-project name="Ticket"/>
+<aop-project name="MyHome"/>
+<aop-project name="Parameter"/>
+</aop-reference-model>

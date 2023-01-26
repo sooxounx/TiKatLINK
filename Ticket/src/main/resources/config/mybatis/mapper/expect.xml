@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="expect"><!-- SQL 문들을 파일마다 구분할 수 있는 이름(보통 테이블명으로 구분) -->
+<!-- 매퍼 파일 여러개 되면 namespace 로 정의한다 -->	
+	
+	<!-- SQL 작성 -->
+	<!-- id= 레코드를 어떤 객체에 담을지, resultType= 레코드를 어떤 타입으로 받을지 -->
+	
+	
+	<!-- <insert id="SQL이름" parameterType="#{컬럼이름}에 들어갈 값"> -->
+	<insert id="insertExpect" parameterType="expect">
+		INSERT INTO expect VALUES(expect_seq.nextval, #{expectContent}, SYSDATE, #{expectProduct}, #{expectMember})
+	</insert>	
+	
+	
+	<!-- id= 서비스로 넘겨줌  resultType= 셀렉트에서만 사용 DB에서 값을 꺼내온다 -->
+	<select id="selectAll" parameterType="int" resultType="expect">  
+	    SELECT e.*, m.*
+	    FROM expect e, member m 
+	    WHERE e.expect_product = #{productSeq} and e.expect_member = m.member_seq 
+	    ORDER BY e.expect_seq desc
+	</select>	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

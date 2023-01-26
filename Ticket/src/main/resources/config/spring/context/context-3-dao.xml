@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- DAO 생성자 인젝션 방식 객체 생성 -->
+	
+	<bean id="bookDao" class="com.ticket.book.BookDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="roundDao" class="com.ticket.round.RoundDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="memberDao" class="com.ticket.member.MemberDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="productDao" class="com.ticket.product.ProductDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="discntDao" class="com.ticket.discnt.DiscntDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="reviewDao" class="com.ticket.review.ReviewDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="expectDao" class="com.ticket.expect.ExpectDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>		
+	
+	<bean id="seatRateDao" class="com.ticket.seatrate.SeatRateDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="actorDao" class="com.ticket.actor.ActorDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	<bean id="adminDao" class="com.ticket.admin.AdminDAO">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+	
+	
+	
+</beans>

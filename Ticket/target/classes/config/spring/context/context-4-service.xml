@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Service 생성자 인젝션 방식 객체 생성 -->
+	
+	<bean id="bookService" class="com.ticket.book.BookService">
+		<constructor-arg ref="bookDao"/>
+	</bean>
+	
+	<bean id="roundService" class="com.ticket.round.RoundService">
+		<constructor-arg ref="roundDao"/>
+	</bean>
+	
+	<bean id="memberService" class="com.ticket.member.MemberService">
+		<constructor-arg ref="memberDao"/>
+	</bean>
+	
+	<bean id="productService" class="com.ticket.product.ProductService">  
+		<constructor-arg ref="productDao"/>
+	</bean>
+	
+	<bean id="discntService" class="com.ticket.discnt.DiscntService">  
+		<constructor-arg ref="discntDao"/>
+	</bean>	
+	
+	<bean id="reviewService" class="com.ticket.review.ReviewService">  
+		<constructor-arg ref="reviewDao"/>
+	</bean>	
+	
+	<bean id="expectService" class="com.ticket.expect.ExpectService">  
+		<constructor-arg ref="expectDao"/>
+	</bean>		
+	
+	<bean id="seatRateService" class="com.ticket.seatrate.SeatRateService">  
+		<constructor-arg ref="seatRateDao"/>
+	</bean>
+	
+	<bean id="actorService" class="com.ticket.actor.ActorService">  
+		<constructor-arg ref="actorDao"/>
+	</bean>
+	
+	<bean id="adminService" class="com.ticket.admin.AdminService">  
+		<constructor-arg ref="adminDao"/>
+	</bean>
+	
+	
+</beans>
